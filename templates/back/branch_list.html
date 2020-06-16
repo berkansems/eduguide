@@ -1,0 +1,58 @@
+{% extends 'back/master_panel.html' %}
+{% load static %}
+{% block content %}
+    <div id="page-content">
+
+        <div class="content-header">
+            <div class="header-section">
+                <h1>
+                    <i class="fa fa-table"></i>Branch List<br><small>you can edit or delete branch!</small>
+                </h1>
+            </div>
+            <div class="breadcrumb breadcrump-top">
+                <li>Branch</li>
+                <li><a href="#">List</a></li>
+            </div>
+        </div>
+
+
+        <div class="block full">
+            <div class="block-title">
+                <h2><strong>Branch</strong> List</h2>
+            </div>
+
+            <div class="table-responsive">
+                <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                    <thead>
+                    <tr>
+
+                        <th class="text-center">ID</th>
+                        <th class="text-center">Title</th>
+                        <th class="text-center">Actions</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for branch in branches %}
+                        <tr class="text-center">
+                            <td>{{ branch.id }}</td>
+                            <td>{{ branch.name }}</td>
+                            <td class="text-center">
+                                <div class="btn-group">
+                                    <a href="{% url 'branch_update' branch.id %}" data-toggle="tooltip" title="Edit"
+                                       class="btn btn-default"><i class="fa fa-pencil">EDIT</i></a>
+                                    <a href="{% url 'branch_delete' branch.id %}" data-toggle="tooltip" title="Delete"
+                                       class="btn btn-danger"><i class="fa fa-times">DELETE</i></a>
+                                </div>
+                            </td>
+                        </tr>
+
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

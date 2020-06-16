@@ -1,0 +1,60 @@
+{% extends 'back/master_panel.html' %}
+{% load static %}
+{% block content %}
+    <div id="page-content">
+
+        <div class="content-header">
+            <div class="header-section">
+                <h1>
+                    <i class="fa fa-table"></i>Teacher List<br><small>you can edit or delete teacher!</small>
+                </h1>
+            </div>
+            <div class="breadcrumb breadcrump-top">
+                <li>Teacher</li>
+                <li><a href="#">List</a></li>
+            </div>
+        </div>
+
+
+        <div class="block full">
+            <div class="block-title">
+                <h2><strong>Teacher</strong> List</h2>
+            </div>
+
+            <div class="table-responsive">
+                <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                    <thead>
+                    <tr>
+
+                        <th class="text-center">ID</th>
+                        <th class="text-center">Full Name</th>
+                        <th class="text-center">Telefon Number</th>
+                        <th class="text-center">Actions</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for teacher in teachers %}
+                        <tr class="text-center">
+                            <td>{{ teacher.id }}</td>
+                            <td>{{ teacher.name }}</td>
+                            <td>{{ teacher.telephone }}</td>
+                            <td class="text-center">
+                                <div class="btn-group">
+                                    <a href="{% url 'teacher_update' teacher.id %}" data-toggle="tooltip" title="Edit"
+                                       class="btn btn-default"><i class="fa fa-pencil">EDIT</i></a>
+                                    <a href="{% url 'teacher_delete' teacher.id %}" data-toggle="tooltip" title="Delete"
+                                       class="btn btn-danger"><i class="fa fa-times">DELETE</i></a>
+                                </div>
+                            </td>
+                        </tr>
+
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

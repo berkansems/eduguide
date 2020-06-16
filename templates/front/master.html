@@ -1,0 +1,170 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Home page || Eduguide</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'front/images/logo.png' %}">
+
+    <!-- All css files are included here. -->
+    <!-- Bootstrap fremwork main css -->
+    <link rel="stylesheet" href="{% static 'front/css/bootstrap.min.css' %}">
+    <!-- This core.css file contents all plugings css file. -->
+    <link rel="stylesheet" href="{% static 'front/css/core.css' %}">
+    <!-- Theme shortcodes/elements style -->
+    <link rel="stylesheet" href="{% static 'front/css/shortcode/shortcodes.css' %}">
+    <!-- Theme main style -->
+    <link rel="stylesheet" href="{% static 'front/style.css' %}">
+    <!-- Responsive css -->
+    <link rel="stylesheet" href="{% static 'front/css/responsive.css' %}">
+    <!-- Style customizer (Remove these two lines please) -->
+    <link rel="stylesheet" href="{% static 'front/css/color/color-1.css' %}">
+
+    <!-- Modernizr JS -->
+    <script src="{% static 'front/js/vendor/modernizr-2.8.3.min.js' %}"></script>
+</head>
+
+<body>
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+<!-- Body main wrapper start -->
+<div class="wrapper">
+    <!-- Start of header area -->
+    <header class="header-area">
+
+        <div class="header-bottom stick-h2">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div class="logo">
+                            <a href="{% url 'home' %}"><img src="{% static 'front/images/logo/logo.png' %}" alt=""> </a>
+                        </div>
+                    </div>
+                    <div class="col-md-8 hidden-sm hidden-xs">
+                        <div class="menu-area f-right">
+                            <nav>
+                                <ul>
+
+                                    <li><a href="{% url 'home' %}">HOME </a></li>
+
+                                    <li><a href="{% url 'my_login' %}">LOG IN </a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- mobile-menu-area start -->
+    <div class="mobile-menu-area">
+        <div class="container">
+            <div class="row">
+                <div class="hidden-lg hidden-md col-sm-12 col-xs-12">
+                    <div class="mobile-menu">
+                        <nav id="dropdown">
+                            <ul>
+                                <li class="active"><a href="index.html">HOME </a>
+
+                                </li>
+                                <li><a href="about-us.html">ABOUT US </a></li>
+
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- mobile-menu-area end -->
+    <!-- End of header area -->
+    <!-- Start of slider area -->
+
+    {% block content %}
+    {% endblock %}
+    <!-- Start footer area -->
+    <footer class="footer-area">
+        <div class="footer-top ptb-110 navy-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="footer-logo-address">
+                            <div class="footer-logo">
+                                <a href="#"><img src="{% static 'front/images/logo/footer-logo.png'  %}" alt=""></a>
+                            </div>
+                            <div class="footer-address">
+                                <div class="header-top-info">
+                                    <ul>
+                                        <li>
+                                            <a href="#">
+                                                <i class="icofont icofont-ui-call"></i>
+                                                Tel (+90) 538 060 50 40
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="icofont icofont-envelope"></i>
+                                                berkansems@gmail.com
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="icofont icofont-location-pin"></i>
+                                                Izmir - Bayraklı
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="footer-bottom-text ptb-5">
+                            <p>
+                                Copyrights © <a href="https://github.com/berkansems/" target="_blank"> 2020 BerkanSems</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div></div></div>
+        <div id="toTop">
+            <i class="fa fa-chevron-up"></i>
+        </div>
+    </footer>
+    <!-- End footer area -->
+    <!-- start scrollUp
+    ============================================ -->
+
+</div>
+<!-- Body main wrapper end -->
+
+
+<!-- Placed js at the end of the document so the pages load faster -->
+<!-- jquery latest version -->
+<script src="{% static 'front/js/vendor/jquery-1.12.0.min.js' %}"></script>
+<!-- Bootstrap framework js -->
+<script src="{% static 'front/js/bootstrap.min.js' %}"></script>
+<!--  ajax-mail.js  -->
+<script src="{% static 'front/js/ajax-mail.js' %}"></script>
+<!-- All js plugins included in this file. -->
+<script src="{% static 'front/js/plugins.js' %}"></script>
+<script src="{% static 'front/js/main.js' %}"></script>
+
+</body>
+
+</html>

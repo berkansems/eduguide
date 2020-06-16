@@ -1,0 +1,87 @@
+{% extends 'back/master_panel.html' %}
+{% load static %}
+{% block content %}
+    <div id="page-content">
+        <!-- Datatables Header -->
+        <div class="content-header">
+            <div class="header-section">
+                <h1>
+                    <i class="fa fa-table"></i>Course List<br><small>you can edit or delete your data!</small>
+                </h1>
+            </div>
+            <div class="breadcrumb breadcrump-top">
+                <li>Course</li>
+                <li><a href="#">List</a></li>
+            </div>
+        </div>
+
+
+        <div class="block full">
+            <div class="block-title">
+                <h2><strong>Course</strong> List</h2>
+            </div>
+
+            <div class="table-responsive">
+                <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                    <thead>
+                    <tr>
+                        <th class="text-center">ID</th>
+                        <th class="text-center " ><i class="hi hi-camera"></i></th>
+                        <th class="text-center ">Course Title</th>
+                        <th class="text-center ">Teacher</th>
+                        <th class="text-center ">Fee</th>
+                        <th class="text-center ">Capacity</th>
+                        <th class="text-center ">Active?</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                    </thead>
+
+                    {% for course in courses %}
+                    <tr>
+                        <td class="text-center">{{ course.id }}</td>
+                        <td class="text-center">
+                            {% if course.pic %}
+                                <img src="{{ course.pic.url }}" style="width: 40px; height: 40px"
+                                                         alt="image"
+                                                         class="img-circle">
+                            {% else %}
+                                <h4>No image</h4>
+                            {% endif %}
+                        </td>
+                        <td class="text-center">{{ course.title }}</td>
+                        <td class="text-center">{{ course.teacher }} </td>
+                        <td class="text-center">{{ course.fee }} </td>
+                        <td class="text-center">{{ course.capacity }}</td>
+                        <td class="text-center">{{ course.status }} <a style="margin-left: 40px" href="{% url 'course_status_update' course.id %}" data-toggle="tooltip" title="change"
+                                   class="btn btn-danger"><i class="hi hi-sort"></i></a></td>
+
+                        <td class="text-center">
+                            <div class="btn-group">
+                                <a  href="{% url 'course_update' course.id %}" data-toggle="tooltip" title="Edit"
+                                   class="btn btn-default"><i class="fa fa-pencil">EDIT</i></a>
+                                <a href="{% url 'course_delete' course.id %}" data-toggle="tooltip" title="Delete"
+                                   class="btn btn-danger"><i class="fa fa-times">DELETE</i></a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- END Datatables Content -->
+
+
+
+{% endblock %}
+
+{% block footerblock %}
+
+    <!-- Load and execute javascript code used only in this page -->
+    <script src="{% static  'back/js/pages/tablesDatatables.js' %}"></script>
+    <script>$(function () {
+        TablesDatatables.init();
+    });</script>
+{% endblock %}

@@ -1,0 +1,103 @@
+{% extends 'front/master.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+
+    <div class="event-area ptb-110">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-title text-center mb-60">
+                        <h1 class="uppercase">Do you want reserve this course? </h1>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do </p>
+                        <div class="separator my mtb-15">
+                            <i class="icofont icofont-hat-alt"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                 <div class="col-md-6 col-sm-12">
+                    <div class="event-text-img">
+                        <form action="" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                            {% if messages %}
+                                <ul class="messages">
+                                    {% for message in messages %}
+                                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}><span style="color: red"><b>{{ message }}</b></span></li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                            <div class="col-xs-8 text-right" style="margin-top: 20px">
+                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i>
+                                    Reservation request
+                                </button>
+                            </div>
+
+                        </form>
+
+                    </div>
+                 </div>
+
+                <div class="col-md-6 col-sm-12">
+                    <div class="event-text-img">
+                        <div class="event-img3">
+                            <a href="#"><img style="width: 165px; height: auto;margin-top: 5px;margin-left: 5px"
+                                             src="{{ course.pic.url }}" alt=""></a>
+
+                        </div>
+                        <div class="visual-inner">
+                            <h3 class="blog-title">
+                                <a href="#">{{ course.title }}</a>
+                            </h3>
+                            <div class="blog-meta">
+                                        <span class="published3">
+                                            <i class="icofont icofont-clock-time"></i>
+                                                Start: {{ course.startDate }}
+                                        </span>
+                                <span class="published3">
+                                                <i class="icofont icofont-ui-calendar"></i>
+                                                End: {{ course.startDate }}
+                                        </span>
+
+                            </div>
+                            <div class="blog-meta">
+                                <span class="published4">
+                                            <i class="icofont icofont-social-google-map"></i>
+                                            {{ course.place }}
+                                        </span>
+                                <span class="published4">
+                                            <i class="icofont icofont-money"></i>
+                                    <span style="color: red">{{ course.fee }} ₺ </span> </span>
+                                <span class="published4">
+                                            <i class="icofont icofont-man-in-glasses"></i>
+                                            max. cap.{{ course.capacity }}
+                                        </span>
+
+                            </div>
+
+
+                            <div class="blog-content">
+                                Branch: <span>{{ course.branch }}</span>
+                            </div>
+                            <div class="blog-content">
+                                By: <span>{{ course.teacher }}</span>
+                            </div>
+                            <div class="blog-content">
+                                introduction: <p>{{ course.introduction }}</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+{% endblock %}

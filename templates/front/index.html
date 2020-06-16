@@ -1,0 +1,209 @@
+{% extends 'front/master.html' %}
+{% load static %}
+{% block content %}
+    <div class="slider-area">
+
+        <div class="slider-active">
+            {% for slider in sliders %}
+                <div class="slider-all">
+                    <img style="width: 1920px ; height: 700px" src="{{ slider.pic.url }}" alt="">
+                    <div class="slider-text-wrapper">
+                        <div class="table">
+                            <div class="table-cell">
+                                <div class="slider-text animated">
+                                    <h1>{{ slider.title }}</h1>
+                                    <p> {{ slider.introduction }} </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- End of slider area -->
+    <!-- Start page content -->
+    <div class="event-area ptb-110">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-title text-center mb-60">
+                        <h1 class="uppercase">Last Added Courses</h1>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do </p>
+                        <div class="separator my mtb-15">
+                            <i class="icofont icofont-hat-alt"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                {% for recentCourse in recentCourses %}
+                    <div class="col-md-6 col-sm-12">
+                        <div class="event-text-img">
+                            <div class="event-img3">
+                                <a href="#"><img style="width: 165px; height: 185px;margin-top: 5px;margin-left: 5px"
+                                                 src="{{ recentCourse.pic.url }}" alt=""></a>
+                                <div class="event-date">
+                                    <span class="tb-publish">{{ recentCourse.createdAt.date.day }}</span>
+                                    <span class="tb-publish2">{{ recentCourse.createdAt.date.month }}</span>
+                                </div>
+                            </div>
+                            <div class="visual-inner">
+                                <h3 class="blog-title">
+                                    <a href="#">{{ recentCourse.title }}</a>
+                                </h3>
+                                <div class="blog-meta">
+                                        <span class="published3">
+                                            <i class="icofont icofont-clock-time"></i>
+                                            {{ recentCourse.startDate }}
+                                        </span>
+                                    <span class="published4">
+                                            <i class="icofont icofont-social-google-map"></i>
+                                            {{ recentCourse.place }}
+                                        </span>
+                                </div>
+                                <div class="blog-content">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do eiusmod tempor
+                                        incididunt
+                                        ut labore et dolore p aliqua. Ut enim ad minim veniam,</p>
+                                </div>
+                                <div class="readmore">
+                                    <a style="color: dodgerblue" href="{% url 'order' recentCourse.id %}">Reserve Now!</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-title text-center pt-110 mb-60">
+                        <h1 class="uppercase">Available Courses</h1>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do </p>
+                        <div class="separator my mtb-15">
+                            <i class="icofont icofont-hat-alt"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                {% for course in availables %}
+                    <div class="col-md-4 col-sm-6" style="margin-bottom: 50px">
+                        <div class="news-are">
+                            <div class="news-img">
+                                <img style="width: 360px; height: 250px" src="{{ course.pic.url }}" alt="">
+                                <div class="news-date navy-bg">
+                                    <div class="blog-meta-2">
+                                            <span class="published3">
+                                                <i class="icofont icofont-ui-calendar"></i>
+                                                Start: {{ course.startDate }}
+                                            </span>
+
+                                    </div>
+                                    <div class="blog-meta for-news">
+                                            <span class="published3">
+                                                <a href="#">
+                                                    Max.  <i class="icofont icofont-man-in-glasses"></i> {{ course.capacity }}
+                                                </a>
+                                            </span>
+                                        <span class="published4">
+                                                <a href="#">
+                                                     <i class="icofont icofont-money"></i> {{ course.fee }} ₺
+                                                </a>
+                                            </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="img-text gray-bg">
+                                <h3><a href="#">{{ course.title }}</a></h3>
+                                <p>{{ course.introduction }}</p>
+                                <a class="button extra-small" href="{% url 'order' course.id %}">
+                                    <span>Reserve now!</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+
+        </div>
+    </div>
+    <div class="counter-area bg-2 bg-opacity bg-relative ptb-110">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-3 text-center">
+                    <div class="counter-bottom2">
+                        <div class="counter-img">
+                            <img src="{% static 'front/images/icons/1.png' %}" alt="">
+                        </div>
+                        <div class="counter-all">
+                            <div class="counter-next2">
+                                <h2>Teachers</h2>
+                            </div>
+                            <div class="counter cnt-two">
+                                <h1>{{ teachers }}</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3  text-center">
+                    <div class="counter-bottom2 mrg-xs">
+                        <div class="counter-img">
+                            <img src="{% static 'front/images/icons/2.png' %}" alt="">
+                        </div>
+                        <div class="counter-all">
+                            <div class="counter-next2">
+                                <h2>Students</h2>
+                            </div>
+                            <div class="counter cnt-two">
+                                <h1>{{ studentsCount }}</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3  text-center">
+                    <div class="counter-bottom2 mrg-xs">
+                        <div class="counter-img">
+                            <img src="{% static 'front/images/icons/3.png' %}" alt="">
+                        </div>
+                        <div class="counter-all">
+                            <div class="counter-next2">
+                                <h2>Courses</h2>
+                            </div>
+                            <div class="counter cnt-two">
+                                <h1>{{ course }}</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3  text-center">
+                    <div class="counter-bottom2 mrg-xs">
+                        <div class="counter-img">
+                            <img src="{% static 'front/images/icons/4.png' %}" alt="">
+                        </div>
+                        <div class="counter-all">
+                            <div class="counter-next2">
+                                <h2>Branches</h2>
+                            </div>
+                            <div class="counter cnt-two">
+                                <h1>{{ branch }}</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- End page content -->
+
+
+
+{% endblock %}
+
+
+

@@ -1,0 +1,64 @@
+{% extends 'back/master_panel.html' %}
+{% load static %}
+
+{% block content %}
+    <div id="page-content">
+
+        <div class="content-header">
+            <div class="header-section">
+                <h1>
+                    <i class="fa fa-table"></i>Add Branches<br><small>you can add new Branch!</small>
+                </h1>
+            </div>
+            <div class="breadcrumb breadcrump-top">
+                <li>Branches</li>
+                <li><a href="#">Add</a></li>
+            </div>
+        </div>
+
+
+        <div class="block full">
+            <div class="block-title">
+                <h2><strong>Add</strong> Branches</h2>
+            </div>
+
+            <div>
+
+                <form action="#" method="POST" class="form-horizontal form-bordered">
+
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <div class="col-md-6" style="margin-bottom: 10px">
+
+                            <input type="text" id="name" name="name" class="form-control" placeholder="Branches title"
+                                   value="{{ branch.name }}">
+
+                        </div>
+
+
+                        <div class="form-group form-actions">
+
+                            <div class="col-md-9 col-md-offset-0">
+                                {% if messages %}
+                                    <br><br>
+                                    <ul class="messages">
+                                        {% for message in messages %}
+                                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}><span
+                                                    style="color: red">{{ message }}</span></li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                                <input type="submit" class="btn btn-sm btn-primary">
+
+                                <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Reset
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

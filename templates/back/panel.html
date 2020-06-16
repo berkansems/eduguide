@@ -1,0 +1,96 @@
+{% extends 'back/master_panel.html' %}
+{% load static %}
+{% block content %}
+
+    <div id="page-content">
+        <!-- Dashboard Header -->
+        <!-- For an image header add the class 'content-header-media' and an image as in the following example -->
+        <div class="content-header content-header-media">
+            <div class="header-section">
+                <div class="row">
+                    <!-- Main Title (hidden on small devices for the statistics to fit) -->
+                    <div class="col-md-4 col-lg-6 hidden-xs hidden-sm">
+                        <h1>Welcome <strong>Admin</strong><br><small>You Look Awesome!</small></h1>
+                    </div>
+                    <!-- END Main Title -->
+
+                </div>
+            </div>
+            <!-- For best results use an image with a resolution of 2560x248 pixels (You can also use a blurred image with ratio 10:1 - eg: 1000x100 pixels - it will adjust and look great!) -->
+            <img src="{% static 'back/img/placeholders/headers/dashboard_header.jpg' %}" alt="header image"
+                 class="animation-pulseSlow">
+        </div>
+        <!-- END Dashboard Header -->
+
+        <!-- Mini Top Stats Row -->
+        <div class="row">
+
+            <div class="col-sm-6 col-lg-3">
+                <!-- Widget -->
+                <a href="{% url 'course_list' %}" class="widget widget-hover-effect1">
+                    <div class="widget-simple">
+                        <div class="widget-icon pull-left themed-background-spring animation-fadeIn">
+                            <i class="gi gi-book_open"></i>
+                        </div>
+                        <h3 class="widget-content text-right animation-pullDown">
+                            {{ count }} <strong>Courses</strong><br>
+                            <small>Total Courses</small>
+                        </h3>
+                    </div>
+                </a>
+                <!-- END Widget -->
+            </div>
+
+            <div class="col-sm-6 col-lg-3">
+                <!-- Widget -->
+                <a href="{% url 'course_add' %}" class="widget widget-hover-effect1">
+                    <div class="widget-simple">
+                        <div class="widget-icon pull-left themed-background-autumn animation-fadeIn">
+                            <i class="fa fa-file-text"></i>
+                        </div>
+                        <h3 class="widget-content text-right animation-pullDown">
+                            New <strong>Course</strong><br>
+                            <small>Ex. Mountain Trip</small>
+                        </h3>
+                    </div>
+                </a>
+                <!-- END Widget -->
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <!-- Widget -->
+                <a href="{% url 'applies' %}" class="widget widget-hover-effect1">
+                    <div class="widget-simple">
+                        <div class="widget-icon pull-left themed-background-fire animation-fadeIn">
+                            <i class="gi gi-file_import"></i>
+                        </div>
+                        <h3 class="widget-content text-right animation-pullDown">
+                            All <strong>Applies</strong>
+                            <small>Support Center</small>
+                        </h3>
+                    </div>
+                </a>
+                <!-- END Widget -->
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <!-- Widget -->
+                <a href="{% url 'slider_add' %}" class="widget widget-hover-effect1">
+                    <div class="widget-simple">
+                        <div class="widget-icon pull-left themed-background-amethyst animation-fadeIn">
+                            <i class="gi gi-picture"></i>
+                        </div>
+                        <h3 class="widget-content text-right animation-pullDown">
+                            Add New <strong>Slider</strong>
+                            <small>Gallery</small>
+                        </h3>
+                    </div>
+                </a>
+                <!-- END Widget -->
+            </div>
+
+        </div>
+        <!-- END Mini Top Stats Row -->
+
+
+    </div>
+
+{% endblock %}

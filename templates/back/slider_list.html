@@ -1,0 +1,82 @@
+00{% extends 'back/master_panel.html' %}
+{% load static %}
+{% block content %}
+    <div id="page-content">
+        <!-- Datatables Header -->
+        <div class="content-header">
+            <div class="header-section">
+                <h1>
+                    <i class="fa fa-table"></i>Slider List<br><small>you can edit or delete your data!</small>
+                </h1>
+            </div>
+            <div class="breadcrumb breadcrump-top">
+                <li>Slider</li>
+                <li><a href="#">List</a></li>
+            </div>
+        </div>
+
+
+        <div class="block full">
+            <div class="block-title">
+                <h2><strong>Slider</strong> List</h2>
+            </div>
+
+            <div class="table-responsive">
+                <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                    <thead>
+                    <tr>
+                        <th class="text-center">ID</th>
+                        <th class="text-center col-md-2" ><i class="hi hi-camera"></i></th>
+                        <th class="text-center ">Slider Title</th>
+                        <th class="text-center ">introduction</th>
+
+                        <th class="text-center">Actions</th>
+                    </tr>
+                    </thead>
+                    <body>
+                    {% for slider in sliders %}
+                    <tr>
+                        <td class="text-center">{{ slider.id }}</td>
+                        <td class="text-center">
+                            {% if slider.pic %}
+                                <img src="{{ slider.pic.url }}" style="width: 40px; height: 40px"
+                                                         alt="image"
+                                                         class="img-circle">
+                            {% else %}
+                                <h4>No image</h4>
+                            {% endif %}
+                        </td>
+
+                        <td>{{ slider.title }}</td>
+                        <td>{{ slider.introduction }}</td>
+
+                        <td class="text-center">
+                            <div class="btn-group">
+                                <a href="{% url 'slider_update' slider.id %}" data-toggle="tooltip" title="Edit"
+                                   class="btn btn-default"><i class="fa fa-pencil">EDIT</i></a>
+                                <a href="{% url 'slider_delete' slider.id %}" data-toggle="tooltip" title="Delete"
+                                   class="btn btn-danger"><i class="fa fa-times">DELETE</i></a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                    </body>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- END Datatables Content -->
+
+
+
+{% endblock %}
+
+{% block footerblock %}
+
+    <!-- Load and execute javascript code used only in this page -->
+    <script src="{% static  'back/js/pages/tablesDatatables.js' %}"></script>
+    <script>$(function () {
+        TablesDatatables.init();
+    });</script>
+{% endblock %}
