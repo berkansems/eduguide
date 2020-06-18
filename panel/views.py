@@ -8,7 +8,6 @@ from .filters import OrderFilter
 @login_required(login_url='my_login')
 def panel(request):
     count=Courses.objects.all().count()
-
     context={'count':count}
     return render(request, 'back/panel.html',context)
 
@@ -153,7 +152,7 @@ def sliderUpdate(request,pk):
             form.save()
             return redirect('slider_list')
         else:
-            messages.info(request, 'r_Error occurred! try again!')
+            messages.info(request, 'Error occurred! try again!')
             return redirect('slider_add')
 
     context = {'form': form}
@@ -218,8 +217,8 @@ def teacherUpdate(request, pk):
 
 @login_required(login_url='my_login')
 def applies(request):
-    students=Student.objects.all()
-    myFilter = OrderFilter(request.GET, queryset=students)
+
+    myFilter = OrderFilter(request.GET)
     students = myFilter.qs
     context={'students':students,'myFilter':myFilter}
     return render(request, 'back/applies.html', context)
