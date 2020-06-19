@@ -223,6 +223,7 @@ def applies(request):
     context={'students':students,'myFilter':myFilter}
     return render(request, 'back/applies.html', context)
 
+
 @login_required(login_url='my_login')
 def studentStatusAccept(request,pk):
     student=Student.objects.get(id=pk)

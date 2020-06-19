@@ -27,7 +27,7 @@ def myLogin(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         upass = request.POST.get('password')
-        print(username, upass)
+
         user = authenticate(username=username, password=upass)
         if user != None:
             login(request, user)
