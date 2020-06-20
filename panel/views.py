@@ -8,10 +8,11 @@ from interface.models import Customer
 from panel.forms import CourseForm, SliderForm, CreateAdminUserForm
 from panel.models import Branch, Teacher, Slider, Courses, Student, Admins
 from .filters import OrderFilter
-from panel.decorators import allowed_users
+from panel.decorators import allowed_users, user_analysis
+
 
 @login_required(login_url='my_login')
-@allowed_users(allowed_roles=['admin'])
+@user_analysis
 def panel(request):
     count=Courses.objects.all().count()
     context={'count':count}
