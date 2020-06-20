@@ -11,6 +11,7 @@ from .filters import OrderFilter
 from panel.decorators import allowed_users, user_analysis
 from ipware import get_client_ip
 from ip2geotools.databases.noncommercial import DbIpCity
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 @login_required(login_url='my_login')
@@ -99,6 +100,16 @@ def courseAdd(request):
 @allowed_users(allowed_roles=['admin'])
 def courseList(request):
     courses = Courses.objects.all()
+
+    paginator = Paginator(courses, 3)
+    page = request.GET.get('page')
+    try:
+        courses = paginator.page(page)
+    except EmptyPage:
+        courses = paginator.page(paginator.num_pages)
+    except PageNotAnInteger:
+        courses = paginator.page(1)
+
     context = {'courses': courses}
     return render(request, 'back/course_list.html',context)
 

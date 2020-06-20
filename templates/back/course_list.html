@@ -26,7 +26,7 @@
                     <thead>
                     <tr>
                         <th class="text-center">ID</th>
-                        <th class="text-center " ><i class="hi hi-camera"></i></th>
+                        <th class="text-center "><i class="hi hi-camera"></i></th>
                         <th class="text-center ">Course Title</th>
                         <th class="text-center ">Teacher</th>
                         <th class="text-center ">Fee</th>
@@ -37,37 +37,60 @@
                     </thead>
 
                     {% for course in courses %}
-                    <tr>
-                        <td class="text-center">{{ course.id }}</td>
-                        <td class="text-center">
-                            {% if course.pic %}
-                                <img src="{{ course.pic.url }}" style="width: 40px; height: 40px"
-                                                         alt="image"
-                                                         class="img-circle">
-                            {% else %}
-                                <h4>No image</h4>
-                            {% endif %}
-                        </td>
-                        <td class="text-center">{{ course.title }}</td>
-                        <td class="text-center">{{ course.teacher }} </td>
-                        <td class="text-center">{{ course.fee }} </td>
-                        <td class="text-center">{{ course.capacity }}</td>
-                        <td class="text-center">{{ course.status }} <a style="margin-left: 40px" href="{% url 'course_status_update' course.id %}" data-toggle="tooltip" title="change"
-                                   class="btn btn-danger"><i class="hi hi-sort"></i></a></td>
+                        <tr>
+                            <td class="text-center">{{ course.id }}</td>
+                            <td class="text-center">
+                                {% if course.pic %}
+                                    <img src="{{ course.pic.url }}" style="width: 40px; height: 40px"
+                                         alt="image"
+                                         class="img-circle">
+                                {% else %}
+                                    <h4>No image</h4>
+                                {% endif %}
+                            </td>
+                            <td class="text-center">{{ course.title }}</td>
+                            <td class="text-center">{{ course.teacher }} </td>
+                            <td class="text-center">{{ course.fee }} </td>
+                            <td class="text-center">{{ course.capacity }}</td>
+                            <td class="text-center">{{ course.status }} <a style="margin-left: 40px"
+                                                                           href="{% url 'course_status_update' course.id %}"
+                                                                           data-toggle="tooltip" title="change"
+                                                                           class="btn btn-danger"><i
+                                    class="hi hi-sort"></i></a></td>
 
-                        <td class="text-center">
-                            <div class="btn-group">
-                                <a  href="{% url 'course_update' course.id %}" data-toggle="tooltip" title="Edit"
-                                   class="btn btn-default"><i class="fa fa-pencil">EDIT</i></a>
-                                <a href="{% url 'course_delete' course.id %}" data-toggle="tooltip" title="Delete"
-                                   class="btn btn-danger"><i class="fa fa-times">DELETE</i></a>
-                            </div>
-                        </td>
-                    </tr>
+                            <td class="text-center">
+                                <div class="btn-group">
+                                    <a href="{% url 'course_update' course.id %}" data-toggle="tooltip" title="Edit"
+                                       class="btn btn-default"><i class="fa fa-pencil">EDIT</i></a>
+                                    <a href="{% url 'course_delete' course.id %}" data-toggle="tooltip" title="Delete"
+                                       class="btn btn-danger"><i class="fa fa-times">DELETE</i></a>
+                                </div>
+                            </td>
+                        </tr>
                     {% endfor %}
 
 
                 </table>
+                Page {{ courses.number }} From {{ courses.paginator.num_pages }}<br>
+                {% if courses.has_previous %}
+                    <a href="?page={{ courses.previous_page_number }}" data-toggle="tooltip" title="Previous"
+                       class="btn btn-xs btn-default"><i class="fa fa-backward"> Previous</i></a>
+                {% endif %}
+                {% for i in courses.paginator.page_range %}
+                    {% if news.number == i %}
+                        <a href="#" onclick="return false; " data-toggle="tooltip" title="{{ Disables }}"
+                           class="btn btn-xs btn-default">{{ i }}</a>
+                    {% else %}
+                        <a href="?page={{ i }}" onclick="return false; " data-toggle="tooltip" title="{{ i }}"
+                           class="btn btn-xs btn-default"> {{ i }} </a>
+
+                    {% endif %}
+                {% endfor %}
+
+                {% if courses.has_next %}
+                    <a href="?page={{ courses.next_page_number }}" data-toggle="tooltip" title="Next"
+                       class="btn btn-xs btn-default"><i class="fa fa-forward"> Next</i></a>
+                {% endif %}
             </div>
         </div>
     </div>
