@@ -20,6 +20,7 @@ def index(request):
     recentCourses=availables.order_by('-pk')[:2]
     sliders=Slider.objects.all().order_by('-pk')[:5]
     studentsCount = Student.objects.all().count()
+
     context={'studentsCount':studentsCount,'sliders':sliders,'teachers':teachers,'branch':branch,'course':course,'recentCourses':recentCourses,'availables':availables}
 
     return render(request,'front/index.html',context)

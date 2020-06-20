@@ -9,6 +9,7 @@ from panel.forms import CourseForm, SliderForm, CreateAdminUserForm
 from panel.models import Branch, Teacher, Slider, Courses, Student, Admins
 from .filters import OrderFilter
 from panel.decorators import allowed_users, user_analysis
+from ipware import get_client_ip
 
 
 @login_required(login_url='my_login')
@@ -16,6 +17,15 @@ from panel.decorators import allowed_users, user_analysis
 def panel(request):
     count=Courses.objects.all().count()
     context={'count':count}
+    ip, is_routable = get_client_ip(request)
+    if ip is None:
+        ip = "0.0.0.0"
+    else:
+        if is_routable:
+            ipv = "Public"
+        else:
+            ipv = "Private"
+    print(ip, ipv)
     return render(request, 'back/panel.html',context)
 
 @login_required(login_url='my_login')
@@ -281,13 +291,18 @@ def adminAdd(request):
         try:
             if form.is_valid():
                 user = form.save()
+                print(user)
                 group = Group.objects.get(name='admin')
                 user.groups.add(group)
+                ip, is_routable = get_client_ip(request)
+                if ip is None:
+                    ip = "0.0.0.0"
                 Admins.objects.create(
                     user=user,
-                    name=user.username
+                    name=user.username,
+                    ip = ip
                 )
-                return render(request, 'back/admin_list.html')
+                return redirect('admin_list')
 
         except:
             messages.info(request,'Errors found')
@@ -297,7 +312,7 @@ def adminAdd(request):
 @login_required(login_url='my_login')
 @allowed_users(allowed_roles=['admin'])
 def adminList(request):
-    adminUsers=Admins.objects.all()
+    adminUsers=Admins.objects.all().exclude(user=request.user.is_staff)
     context={'adminUsers':adminUsers}
     return render(request,'back/admin_list.html',context)
 

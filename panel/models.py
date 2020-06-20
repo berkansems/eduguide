@@ -91,4 +91,6 @@ class Student(models.Model):
 class Admins(models.Model):
     user = models.OneToOneField(User,null=True,on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
+    ip = models.CharField(max_length=200,null=True,blank=True)
+
 
