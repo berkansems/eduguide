@@ -55,8 +55,16 @@
                                 <ul>
 
                                     <li><a href="{% url 'home' %}">HOME </a></li>
+                                    {% if request.user.username  %}
+                                        <li><a href="{% url 'my_logout' %}">LOG OUT </a></li>
+                                        <li>WELCOME <span style="color: red ; text-transform: uppercase"> {{ request.user.username }}</span> !!</li>
+                                    {% else %}
+                                        <li><a href="{% url 'my_login' %}">LOG IN </a></li>
 
-                                    <li><a href="{% url 'my_login' %}">LOG IN </a></li>
+                                    {% endif %}
+
+
+
                                 </ul>
                             </nav>
                         </div>
