@@ -1,4 +1,6 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 from panel.models import Courses, Slider,Student
 
@@ -19,3 +21,7 @@ class StudentForm(forms.ModelForm):
         model = Student
         fields= ['name','email', 'telephone']
 
+class CreateAdminUserForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['username','password1','password2']

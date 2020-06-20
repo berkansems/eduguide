@@ -146,7 +146,7 @@
 
                                 <li class="sidebar-header">
                                     <span class="sidebar-header-options clearfix"><a href="javascript:void(0)" data-toggle="tooltip" title="Quick Settings"><i class="gi gi-settings"></i></a><a href="javascript:void(0)" data-toggle="tooltip" title="Change slider image and features!"><i class="gi gi-lightbulb"></i></a></span>
-                                    <span class="sidebar-header-title">Design Kit</span>
+                                    <span class="sidebar-header-title">Design & Admin Kit</span>
                                 </li>
                                 <li>
                                     <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-certificate sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">User Interface</span></a>
@@ -161,15 +161,24 @@
 
                                     </ul>
                                 </li>
+
+                                <li>
+                                    <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-certificate sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Admin Manager</span></a>
+                                    <ul>
+                                        <li>
+                                            <a href="{% url 'admin_add' %}"><i class="gi gi-film sidebar-nav-icon"></i>New Admin</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'admin_list' %}"><i class="gi gi-notes_2 sidebar-nav-icon"></i>List all Admins</a>
+                                        </li>
+
+
+                                    </ul>
+                                </li>
                                 <hr>
                                 <li>
                                     <a href="{% url 'applies' %}"><i class="gi gi-search sidebar-nav-icon"></i>All Applies</a>
                                 </li>
-
-
-
-
-
 
                             </ul>
                             <!-- END Sidebar Navigation -->
