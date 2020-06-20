@@ -77,12 +77,12 @@
                        class="btn btn-xs btn-default"><i class="fa fa-backward"> Previous</i></a>
                 {% endif %}
                 {% for i in courses.paginator.page_range %}
-                    {% if news.number == i %}
+                    {% if courses.number == i %}
                         <a href="#" onclick="return false; " data-toggle="tooltip" title="{{ Disables }}"
                            class="btn btn-xs btn-default">{{ i }}</a>
                     {% else %}
-                        <a href="?page={{ i }}" onclick="return false; " data-toggle="tooltip" title="{{ i }}"
-                           class="btn btn-xs btn-default"> {{ i }} </a>
+                        <a href="?page={{i}}" data-toggle="tooltip" title="{{i}}"
+                           class="btn btn-xs btn-default"> {{i}} </a>
 
                     {% endif %}
                 {% endfor %}
