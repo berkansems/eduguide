@@ -86,7 +86,7 @@
             <div id="login-container">
                 <!-- Login Title -->
                 <div class="login-title text-center">
-                    <h1><strong>Admin</strong>  <strong>Login</strong></h1>
+                    <h1><strong>Login</strong> or <strong>Register</strong></h1>
                 </div>
                 <!-- END Login Title -->
 
@@ -126,7 +126,12 @@
                                 </button>
                             </div>
                         </div>
-
+                        <div class="form-group">
+                            <div class="col-xs-12 text-center">
+                                <a href="#"><small>Forgot password?</small></a> -
+                                <a href="{% url 'sign_up' %}"><small>Create a new account</small></a>
+                            </div>
+                        </div>
                         {% if messages %}
                             <ul class="messages">
                                 {% for message in messages %}

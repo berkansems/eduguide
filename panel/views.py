@@ -1,17 +1,24 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group, User
 from django.shortcuts import render, redirect
-from panel.forms import CourseForm, SliderForm
-from panel.models import Branch, Teacher, Slider, Courses, Student
+
+
+from interface.models import Customer
+from panel.forms import CourseForm, SliderForm, CreateAdminUserForm
+from panel.models import Branch, Teacher, Slider, Courses, Student, Admins
 from .filters import OrderFilter
+from panel.decorators import allowed_users
 
 @login_required(login_url='my_login')
+@allowed_users(allowed_roles=['admin'])
 def panel(request):
     count=Courses.objects.all().count()
     context={'count':count}
     return render(request, 'back/panel.html',context)
 
 @login_required(login_url='my_login')
+@allowed_users(allowed_roles=['admin'])
 def branchAdd(request):
     if request.method == "POST":
         branchName = request.POST.get('name')
@@ -31,18 +38,21 @@ def branchAdd(request):
     return render(request, 'back/branch_add.html')
 
 @login_required(login_url='my_login')
+@allowed_users(allowed_roles=['admin'])
 def branchList(request):
     branches = Branch.objects.all()
     context = {'branches': branches}
     return render(request, 'back/branch_list.html', context)
 
 @login_required(login_url='my_login')
+@allowed_users(allowed_roles=['admin'])
 def branchDelete(request, pk):
     branch = Branch.objects.get(id=pk)
     branch.delete()
     return redirect('branch_list')
 
 @login_required(login_url='my_login')
+@allowed_users(allowed_roles=['admin'])
 def branchUpdate(request, pk):
     branch = Branch.objects.get(id=pk)
     if request.method == "POST":
@@ -56,6 +66,7 @@ def branchUpdate(request, pk):
 
     return render(request, 'back/branch_update.html', {'branch': branch})
 @login_required(login_url='my_login')
+@allowed_users(allowed_roles=['admin'])
 def courseAdd(request):
     teachers = Teacher.objects.all()
     branches=Branch.objects.all()
@@ -73,18 +84,21 @@ def courseAdd(request):
     return render(request, 'back/course_add.html',context)
 
 @login_required(login_url='my_login')
+@allowed_users(allowed_roles=['admin'])
 def courseList(request):
     courses = Courses.objects.all()
     context = {'courses': courses}
     return render(request, 'back/course_list.html',context)
 
 @login_required(login_url='my_login')
+@allowed_users(allowed_roles=['admin'])
 def courseDelete(request,pk):
     course = Courses.objects.get(id=pk)
     course.delete()
     return redirect('course_list')
 
 @login_required(login_url='my_login')
+@allowed_users(allowed_roles=['admin'])
 def courseStatusUpdate(request,pk):
     course = Courses.objects.get(id=pk)
     course.status = course.statusChange
@@ -92,6 +106,7 @@ def courseStatusUpdate(request,pk):
     return redirect('course_list')
 
 @login_required(login_url='my_login')
+@allowed_users(allowed_roles=['admin'])
 def courseUpdate(request,pk):
     teachers = Teacher.objects.all()
     branches = Branch.objects.all()
@@ -113,6 +128,7 @@ def courseUpdate(request,pk):
     return render(request, 'back/course_update.html',context)
 
 @login_required(login_url='my_login')
+@allowed_users(allowed_roles=['admin'])
 def sliderAdd(request):
     form = SliderForm()
     if request.method == "POST":
@@ -129,6 +145,7 @@ def sliderAdd(request):
     return render(request, 'back/slider_add.html',context)
 
 @login_required(login_url='my_login')
+@allowed_users(allowed_roles=['admin'])
 def sliderList(request):
     sliders = Slider.objects.all()
     context = {'sliders': sliders}
@@ -143,6 +160,7 @@ def sliderDelete(request,pk):
 
 
 @login_required(login_url='my_login')
+@allowed_users(allowed_roles=['admin'])
 def sliderUpdate(request,pk):
     slider = Slider.objects.get(id=pk)
     form = SliderForm(instance=slider)
@@ -162,6 +180,7 @@ def sliderUpdate(request,pk):
 
 
 @login_required(login_url='my_login')
+@allowed_users(allowed_roles=['admin'])
 def teacherAdd(request):
     if request.method == "POST":
         teacherName = request.POST.get('name')
@@ -188,18 +207,21 @@ def teacherAdd(request):
     return render(request, 'back/teacher_add.html')
 
 @login_required(login_url='my_login')
+@allowed_users(allowed_roles=['admin'])
 def teacherList(request):
     teachers = Teacher.objects.all()
     context = {'teachers': teachers}
     return render(request, 'back/teacher_list.html', context)
 
 @login_required(login_url='my_login')
+@allowed_users(allowed_roles=['admin'])
 def teacherDelete(request, pk):
     teacher = Teacher.objects.get(id=pk)
     teacher.delete()
     return redirect('teacher_list')
 
 @login_required(login_url='my_login')
+@allowed_users(allowed_roles=['admin'])
 def teacherUpdate(request, pk):
     teacher = Teacher.objects.get(id=pk)
     if request.method == "POST":
@@ -216,6 +238,7 @@ def teacherUpdate(request, pk):
     return render(request, 'back/teacher_update.html', {'teacher': teacher})
 
 @login_required(login_url='my_login')
+@allowed_users(allowed_roles=['admin'])
 def applies(request):
 
     myFilter = OrderFilter(request.GET)
@@ -225,6 +248,7 @@ def applies(request):
 
 
 @login_required(login_url='my_login')
+@allowed_users(allowed_roles=['admin'])
 def studentStatusAccept(request,pk):
     student=Student.objects.get(id=pk)
     student.appStatus= 'Accepted'
@@ -232,6 +256,7 @@ def studentStatusAccept(request,pk):
     return redirect('applies')
 
 @login_required(login_url='my_login')
+@allowed_users(allowed_roles=['admin'])
 def studentStatusReject(request,pk):
     student = Student.objects.get(id=pk)
     student.appStatus = 'Rejected'
@@ -244,3 +269,43 @@ def studentStatusPending(request,pk):
     student.appStatus = 'Pending'
     student.save()
     return redirect('applies')
+
+
+
+@login_required(login_url='my_login')
+@allowed_users(allowed_roles=['admin'])
+def adminAdd(request):
+    form = CreateAdminUserForm(request.POST)
+    if request.method == "POST":
+        try:
+            if form.is_valid():
+                user = form.save()
+                group = Group.objects.get(name='admin')
+                user.groups.add(group)
+                Admins.objects.create(
+                    user=user,
+                    name=user.username
+                )
+                return render(request, 'back/admin_list.html')
+
+        except:
+            messages.info(request,'Errors found')
+    context = {'form':form}
+    return render(request,'back/admin_add.html',context)
+
+@login_required(login_url='my_login')
+@allowed_users(allowed_roles=['admin'])
+def adminList(request):
+    adminUsers=Admins.objects.all()
+    context={'adminUsers':adminUsers}
+    return render(request,'back/admin_list.html',context)
+
+@login_required(login_url='my_login')
+@allowed_users(allowed_roles=['admin'])
+def adminDelete(request,pk):
+    adminUser=Admins.objects.get(id=pk)
+    if request.user.is_staff:
+        adminUser.delete()
+    else:
+        messages.info(request,'Only superusers(staffs) can delete admins!')
+    return redirect('admin_list')

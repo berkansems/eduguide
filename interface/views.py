@@ -1,6 +1,10 @@
+from django.contrib.auth.models import Group
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+
+from interface.forms import CreateUserForm
+from interface.models import Customer
 from panel.forms import StudentForm
 from panel.models import Slider, Teacher, Branch, Courses, Student
 from interface.decorators import unauthenticated_user
@@ -38,6 +42,26 @@ def myLogin(request):
 
     return render(request, 'front/login.html')
 
+@unauthenticated_user
+def mySignup(request):
+    form = CreateUserForm()
+    if request.method == 'POST':
+        form=CreateUserForm(request.POST)
+        try:
+            if form.is_valid():
+                user = form.save()
+                group = Group.objects.get(name='customer')
+                user.groups.add(group)
+                Customer.objects.create(
+                   user=user,
+                   name=user.username
+                )
+                return redirect('my_login')
+
+        except:
+            messages.info(request,{{form.errors}})
+    context={'form':form}
+    return render(request, 'front/signup.html',context)
 
 def myLogout(request):
     logout(request)
