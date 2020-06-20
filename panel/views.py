@@ -10,6 +10,7 @@ from panel.models import Branch, Teacher, Slider, Courses, Student, Admins
 from .filters import OrderFilter
 from panel.decorators import allowed_users, user_analysis
 from ipware import get_client_ip
+from ip2geotools.databases.noncommercial import DbIpCity
 
 
 @login_required(login_url='my_login')
@@ -291,16 +292,22 @@ def adminAdd(request):
         try:
             if form.is_valid():
                 user = form.save()
-                print(user)
+
                 group = Group.objects.get(name='admin')
                 user.groups.add(group)
                 ip, is_routable = get_client_ip(request)
                 if ip is None:
                     ip = "0.0.0.0"
+                try:
+                    response= DbIpCity.get(ip,api_key='free')
+                    country = response.country + " | " + response.city
+                except:
+                    country="Unknown"
                 Admins.objects.create(
                     user=user,
                     name=user.username,
-                    ip = ip
+                    ip = ip,
+                    country = country,
                 )
                 return redirect('admin_list')
 
