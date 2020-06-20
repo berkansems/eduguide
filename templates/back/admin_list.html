@@ -1,0 +1,66 @@
+{% extends 'back/master_panel.html' %}
+{% load static %}
+{% block content %}
+    <div id="page-content">
+
+        <div class="content-header">
+            <div class="header-section">
+                <h1>
+                    <i class="fa fa-table"></i>Admin List<br><small>you can edit or delete Admin!</small>
+                </h1>
+            </div>
+            <div class="breadcrumb breadcrump-top">
+                <li>Admin</li>
+                <li><a href="#">List</a></li>
+            </div>
+        </div>
+
+
+        <div class="block full">
+            <div class="block-title">
+                <h2><strong>Branch</strong> List</h2>
+            </div>
+
+            <div class="table-responsive">
+                <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                    <thead>
+                    <tr>
+
+                        <th class="text-center">ID</th>
+                        <th class="text-center">Admin Username</th>
+                        <th class="text-center">Action</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for admin in adminUsers %}
+                        <tr class="text-center">
+                            <td>{{ admin.id }}</td>
+                            <td>{{ admin.user }}</td>
+                            <td class="text-center">
+                                <div class="btn-group">
+
+                                    <a href="{% url 'admin_delete' admin.id %}" data-toggle="tooltip" title="Delete"
+                                       class="btn btn-danger"><i class="fa fa-times">DELETE</i></a>
+                                </div>
+                            </td>
+                        </tr>
+
+                    {% endfor %}
+
+                    </tbody>
+                    {% if messages %}
+                        <br><br>
+                        <ul class="messages">
+                            {% for message in messages %}
+                                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}><span
+                                        style="color: red">{{ message }}</span></li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

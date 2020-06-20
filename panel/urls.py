@@ -32,4 +32,8 @@ urlpatterns = [
     path('student_status_pending/<str:pk>/', views.studentStatusPending, name='student_status_pending'),
 
 
+    path('admin_add/', views.adminAdd, name='admin_add'),
+    path('admin_list/', views.adminList, name='admin_list'),
+    path('admin_delete/<str:pk>/', views.adminDelete, name='admin_delete'),
+
 ]
