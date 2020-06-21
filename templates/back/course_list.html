@@ -14,6 +14,30 @@
                 <li><a href="#">List</a></li>
             </div>
         </div>
+        <div class="block full">
+            <div class="block-title">
+                <h2><strong>Export</strong> Data </h2>
+            </div>
+            <a href="{% url 'export_cat_csv' %}" data-toggle="tooltip" title="Export CSV File"
+                       class="btn btn-s btn-default"><i class="fa fa-list"> CSV</i></a>
+
+
+
+        </div>
+        <div class="block full">
+            <div class="block-title">
+                <h2><strong>Inport</strong> Data </h2>
+            </div>
+            <form action="{% url 'import_cat_csv' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="table-responsive">
+                    <input type="file" name="csv_file" id="csv_file" />
+                    <br/>
+                    <button type="submit"> Submit</button>
+                </div>
+            </form>
+
+        </div>
 
 
         <div class="block full">

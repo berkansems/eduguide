@@ -1,10 +1,12 @@
+import csv
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import Group, User
+from django.contrib.auth.models import Group
+from django.contrib.sessions.backends import file
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
 
-
-from interface.models import Customer
 from panel.forms import CourseForm, SliderForm, CreateAdminUserForm
 from panel.models import Branch, Teacher, Slider, Courses, Student, Admins
 from .filters import OrderFilter
@@ -112,6 +114,40 @@ def courseList(request):
 
     context = {'courses': courses}
     return render(request, 'back/course_list.html',context)
+
+def exportCatCsv(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="category_list.csv"'
+    writer = csv.writer(response)
+    writer.writerow(['Title', 'Fee', 'Capacity', 'Status'])
+    for i in Courses.objects.all() :
+        writer.writerow([i.title, i.fee , i.capacity , i.status])
+    return response
+
+def importCatCsv(request):
+    if request.method == 'POST':
+        csv_file = request.FILES['csv_file']
+        if not csv_file.name.endswith('.csv'):
+            messages.info(request, "Please Input CSV File")
+            return redirect('course_list')
+        if csv_file.multiple_chunks():
+            messages.info(request, "File too large")
+            return redirect('course_list')
+
+        file_data = csv_file.read().decode("utf-8")
+
+        lines = file_data.split("\n")
+        for line in lines :
+
+            fields = line.split(",")
+
+            try:
+                if len(Courses.objects.filter(title=fields[0])) == 0 and fields[0] != 'title' and fields[0] != '':
+                    b = Courses(title=fields[0],fee=fields[1],capacity=fields[2],status=fields[3])
+                    b.save()
+            except:
+                print("finish")
+    return redirect('course_list')
 
 @login_required(login_url='my_login')
 @allowed_users(allowed_roles=['admin'])

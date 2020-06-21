@@ -11,6 +11,8 @@ urlpatterns = [
 
     path('course_add/',views.courseAdd,name='course_add'),
     path('course_list/',views.courseList,name='course_list'),
+    path('export_cat_csv/',views.exportCatCsv,name='export_cat_csv'),
+    path('import_cat_csv/',views.importCatCsv,name='import_cat_csv'),
     path('course_delete/<str:pk>/',views.courseDelete,name='course_delete'),
     path('course_update/<str:pk>/',views.courseUpdate,name='course_update'),
     path('course_status_update/<str:pk>/',views.courseStatusUpdate,name='course_status_update'),
