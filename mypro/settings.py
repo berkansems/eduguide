@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'django.contrib.humanize',
     'django_filters',
+    'django_crontab',
 ]
 
 MIDDLEWARE = [
@@ -131,3 +132,7 @@ STATICFILES_DIRS = [
 ]
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+CRONJOBS = [
+    ('*/1 * * * *','panel.cron.my_job')
+]

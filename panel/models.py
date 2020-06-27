@@ -70,7 +70,6 @@ class Courses(models.Model):
         return url
 
 
-
 class Student(models.Model):
     Status = (
         ('Pending', 'Pending'),
@@ -94,4 +93,7 @@ class Admins(models.Model):
     ip = models.CharField(max_length=200,null=True,blank=True)
     country = models.CharField(max_length=200,null=True)
 
-
+class CronList(models.Model):
+    name = models.CharField(max_length=200)
+    date = models.DateTimeField(auto_now_add=True)
+    ip = models.CharField(max_length=200, null=True, blank=True)

@@ -93,3 +93,4 @@ def order(request,pk):
 
     context={'course':course,'form':form}
     return render(request,'front/order.html',context)
+

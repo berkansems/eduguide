@@ -379,3 +379,7 @@ def adminDelete(request,pk):
     else:
         messages.info(request,'Only superusers(staffs) can delete admins!')
     return redirect('admin_list')
+
+
+def cronList(request):
+    return render(request,'back/cron_list.html')

@@ -38,4 +38,6 @@ urlpatterns = [
     path('admin_list/', views.adminList, name='admin_list'),
     path('admin_delete/<str:pk>/', views.adminDelete, name='admin_delete'),
 
+    path('cron_list/', views.cronList, name='cron_list'),
+
 ]
