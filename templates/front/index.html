@@ -65,9 +65,7 @@
                                         </span>
                                 </div>
                                 <div class="blog-content">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do eiusmod tempor
-                                        incididunt
-                                        ut labore et dolore p aliqua. Ut enim ad minim veniam,</p>
+                                    <p>{{ recentCourse.introduction | truncatewords:22 |linebreaks}}</p>
                                 </div>
                                 <div class="readmore">
                                     <a style="color: dodgerblue" href="{% url 'order' recentCourse.id %}">Reserve Now!</a>
@@ -119,7 +117,7 @@
                             </div>
                             <div class="img-text gray-bg">
                                 <h3><a href="#">{{ course.title }}</a></h3>
-                                <p>{{ course.introduction }}</p>
+                                <p>{{ course.introduction|truncatewords:22 }}</p>
                                 <a class="button extra-small" href="{% url 'order' course.id %}">
                                     <span>Reserve now!</span>
                                 </a>
