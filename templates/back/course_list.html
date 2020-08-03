@@ -84,7 +84,7 @@
 
                             <td class="text-center">
                                 <div class="btn-group">
-                                    <a href="{% url 'course_update' course.id %}" data-toggle="tooltip" title="Edit"
+                                    <a href="/panel/course_update/{{ course.id }}" data-toggle="tooltip" title="Edit"
                                        class="btn btn-default"><i class="fa fa-pencil">EDIT</i></a>
                                     <a href="{% url 'course_delete' course.id %}" data-toggle="tooltip" title="Delete"
                                        class="btn btn-danger"><i class="fa fa-times">DELETE</i></a>

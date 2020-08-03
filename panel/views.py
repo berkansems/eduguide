@@ -32,6 +32,7 @@ def panel(request):
     print(ip, ipv)
     return render(request, 'back/panel.html',context)
 
+
 @login_required(login_url='my_login')
 @allowed_users(allowed_roles=['admin'])
 def branchAdd(request):
@@ -251,7 +252,7 @@ def teacherAdd(request):
 
         if len(Teacher.objects.filter(name=teacherName)) != 0 and len(
                 Teacher.objects.filter(telephone=teacherTelephone)) != 0:
-            messages.info(request, 'this branch entered before with the same phone number!')
+            messages.info(request, 'this teacher entered before with the same phone number!')
             return redirect('teacher_add')
 
         try:
