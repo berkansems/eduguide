@@ -55,8 +55,8 @@
                         <td class="text-center">{{ student.email }} </td>
                         <td class="text-center">{{ student.appDate|naturaltime }}</td>
                         <td class="text-center">{{ student.appStatus }} <a style="margin-left: 10px" href="{% url 'student_status_accept' student.id %}" data-toggle="tooltip" title="Accept"
-                                   class="btn btn-success"><i class="hi hi-plus"></i></a><a style="margin-left: 10px" href="{% url 'student_status_reject' student.id %}" data-toggle="tooltip" title="Accept"
-                                   class="btn btn-danger"><i class="hi hi-minus"></i></a><a style="margin-left: 10px" href="{% url 'student_status_pending' student.id %}" data-toggle="tooltip" title="Accept"
+                                   class="btn btn-success"><i class="hi hi-plus"></i></a><a style="margin-left: 10px" href="{% url 'student_status_reject' student.id %}" data-toggle="tooltip" title="Reject"
+                                   class="btn btn-danger"><i class="hi hi-minus"></i></a><a style="margin-left: 10px" href="{% url 'student_status_pending' student.id %}" data-toggle="tooltip" title="Pending"
                                    class="btn btn-default"><i class="hi hi-ban-circle"></i></a></td>
                         <td class="text-center">{{ student.course.status }} <a style="margin-left: 40px" href="{% url 'course_status_update' student.course.id %}" data-toggle="tooltip" title="change"
                                    class="btn btn-danger"><i class="hi hi-sort"></i></a></td>

@@ -88,10 +88,14 @@
                                         <img src="{% static 'back/img/placeholders/avatars/avatar2.jpg' %}" alt="avatar">
                                     </a>
                                 </div>
-                                <div class="sidebar-user-name">{{ request.user.username }}</div>
-                                <div class="sidebar-user-links">
+                                <div class="sidebar-user-name" style="margin-top: -5px">{{ request.user.username }}</div>
+                                <div class="sidebar-user-links" style="margin-top: 2px">
 
                                     <a href="{% url 'my_logout' %}" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="gi gi-exit "></i>  Log out</a>
+                                </div>
+                                <div class="sidebar-user-links" style="margin-top: 5px">
+
+                                    <a href="{% url 'home' %}" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="gi gi-home "></i> <strong>See</strong> Home!</a>
                                 </div>
                             </div>
                             <!-- END User Info -->

@@ -32,8 +32,7 @@
 
 <body>
 <!--[if lt IE 8]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
-    your browser</a> to improve your experience.</p>
+
 <![endif]-->
 <!-- Body main wrapper start -->
 <div class="wrapper">
@@ -58,6 +57,9 @@
                                     <li><a href="{% url 'home' %}">HOME </a></li>
                                     {% if request.user.username  %}
                                         <li><a href="{% url 'my_logout' %}">LOG OUT </a></li>
+                                        {% if request.user.is_superuser %}
+                                            <li><a href="{% url 'panel' %}">PANEL </a></li>
+                                        {% endif %}
                                         <li>WELCOME <span style="color: red ; text-transform: uppercase"> {{ request.user.username }}</span> !!</li>
                                     {% else %}
                                         <li><a href="{% url 'my_login' %}">LOG IN </a></li>
