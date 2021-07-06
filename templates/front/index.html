@@ -1,6 +1,9 @@
 {% extends 'front/master.html' %}
 {% load static %}
+{% load humanize %}
 {% block content %}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.13.18/jquery.timepicker.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.13.18/jquery.timepicker.js"></script>
     <div class="slider-area">
 
         <div class="slider-active">
@@ -121,6 +124,47 @@
                                 <a class="button extra-small" href="{% url 'order' course.id %}">
                                     <span>Reserve now!</span>
                                 </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-title text-center mb-60">
+                        <h1 class="uppercase">Last NEWS</h1>
+
+                        <div class="separator my mtb-15">
+                            <i class="icofont icofont-hat-alt"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                {% for item in all_news %}
+                    <div class="col-md-6 col-sm-12">
+                        <div class="event-text-img">
+                            <div class="event-img3">
+                                <a href="{{ item.pic }}"><img style="width: 165px; height: 185px;margin-top: 5px;margin-left: 5px"
+                                                 src="{{ item.pic }}" alt=""></a>
+                                <div class="event-date">
+                                    <span class="tb-publish">{{ item.date_of_publish |naturaltime }}</span>
+
+                                </div>
+                            </div>
+                            <div class="visual-inner">
+                                <h3 class="blog-title">
+                                    <a href="#">{{ item.author }} </a>
+                                </h3>
+                                <div class="blog-meta">
+                                        <span class="published3">
+                                            <i class="icofont icofont-clock-time"></i>
+                                            {{ item.title }}
+                                        </span>
+
+                                </div>
+
                             </div>
                         </div>
                     </div>

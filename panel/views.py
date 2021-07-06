@@ -12,7 +12,7 @@ from panel.models import Branch, Teacher, Slider, Courses, Student, Admins
 from .filters import OrderFilter
 from panel.decorators import allowed_users, user_analysis
 from ipware import get_client_ip
-from ip2geotools.databases.noncommercial import DbIpCity
+
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
@@ -170,21 +170,25 @@ def courseStatusUpdate(request,pk):
 def courseUpdate(request,pk):
     teachers = Teacher.objects.all()
     branches = Branch.objects.all()
-    course= Courses.objects.get(id=pk)
-    form = CourseForm(instance=course)
-    if request.method == "POST":
-        form = CourseForm(request.POST, request.FILES,instance=course)
+    try:
+        course= Courses.objects.get(id=pk)
+        form = CourseForm(instance=course)
+        if request.method == "POST":
+            form = CourseForm(request.POST, request.FILES,instance=course)
 
-        if form.is_valid():
+            if form.is_valid():
 
-            form.save()
+                form.save()
 
-            return redirect('course_list')
-        else:
-            messages.info(request, 'Error occurred! try again!')
-            return redirect('course_add')
+                return redirect('course_list')
+            else:
+                messages.info(request, 'Error occurred! try again!')
+                return redirect('course_add')
 
-    context = {"teachers": teachers, "branches": branches, "form": form}
+        context = {"teachers": teachers, "branches": branches, "form": form}
+    except ExceptionError as tr:
+        print(tr)
+        pass
     return render(request, 'back/course_update.html',context)
 
 @login_required(login_url='my_login')
@@ -343,14 +347,10 @@ def adminAdd(request):
 
                 group = Group.objects.get(name='admin')
                 user.groups.add(group)
-                ip, is_routable = get_client_ip(request)
-                if ip is None:
-                    ip = "0.0.0.0"
-                try:
-                    response= DbIpCity.get(ip,api_key='free')
-                    country = response.country + " | " + response.city
-                except:
-                    country="Unknown"
+
+                ip = "0.0.0.0"
+
+                country="Unknown"
                 Admins.objects.create(
                     user=user,
                     name=user.username,

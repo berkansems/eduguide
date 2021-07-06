@@ -33,8 +33,8 @@ class Slider(models.Model):
 
 
 class Courses(models.Model):
-    branch = models.ForeignKey(Branch, null=True , on_delete=models.CASCADE)
-    teacher = models.ForeignKey(Teacher, null=True , on_delete=models.CASCADE)
+    branch = models.ForeignKey(Branch, related_name= "bra", null=True , on_delete=models.CASCADE)
+    teacher = models.ForeignKey(Teacher, related_name= "teach" , null=True , on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     place = models.CharField(max_length=50)
     introduction = models.CharField(max_length=500)
