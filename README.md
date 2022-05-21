@@ -5,3 +5,5 @@ In order to access admin panel please make a django superuser or simply log in w
 username: berkan
 <br>
 password: 123
+
+<hr>
