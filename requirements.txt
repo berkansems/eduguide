@@ -4,7 +4,7 @@ django-crispy-forms==1.9.1
 django-filter==2.3.0
 Pillow==8.2.0
 pytz==2020.1
-sqlparse==0.3.1
+sqlparse==0.4.4
 lazy-object-proxy==1.4.0
 django-ipware==2.1.0
 
