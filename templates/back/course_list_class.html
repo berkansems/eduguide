@@ -1,0 +1,60 @@
+{% extends 'back/master_panel.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+    <div id="page-content">
+        <!-- Datatables Header -->
+        <div class="content-header">
+            <div class="header-section">
+                <h1>
+                    <i class="fa fa-table"></i>List Course<br><small>class!</small>
+                </h1>
+            </div>
+            <div class="breadcrumb breadcrump-top">
+                <li>Course</li>
+                <li><a href="#">List</a></li>
+            </div>
+        </div>
+
+
+        <div class="block full">
+            <div class="block-title">
+                <h2><strong>List</strong> Course until {{ now }}</h2>
+            </div>
+
+            <div>
+
+                <ul>
+                {% for course in object_list %}
+                    <li><a href="{% url 'course_update_class' course.id %}">{{ course.title }} - {{ course.teacher }}</a></li>
+                {% empty %}
+                    <li>No articles yet.</li>
+                {% endfor %}
+                </ul>
+            </div>
+                Page {{ page_obj.number }} From {{ page_obj.paginator.num_pages }}<br>
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}" data-toggle="tooltip" title="Previous"
+                       class="btn btn-xs btn-default"><i class="fa fa-backward"> Previous</i></a>
+                {% endif %}
+                {% for i in object_list.paginator.page_range %}
+                    {% if page_obj.number == i %}
+                        <a href="#" onclick="return false; " data-toggle="tooltip" title="{{ Disables }}"
+                           class="btn btn-xs btn-default">{{ i }}</a>
+                    {% else %}
+                        <a href="?page={{i}}" data-toggle="tooltip" title="{{i}}"
+                           class="btn btn-xs btn-default"> {{i}} </a>
+
+                    {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}" data-toggle="tooltip" title="Next"
+                       class="btn btn-xs btn-default"><i class="fa fa-forward"> Next</i></a>
+                {% endif %}
+        </div>
+    </div>
+    <!-- END Datatables Content -->
+
+{% endblock %}
+

@@ -98,3 +98,32 @@ class CronList(models.Model):
     name = models.CharField(max_length=200)
     date = models.DateTimeField(auto_now_add=True)
     ip = models.CharField(max_length=200, null=True, blank=True)
+
+class DocumentsRepository(models.Model):
+    TYPES = (
+        ('shipment_notification', 'Kargo Barkodu Oluştur Popup İçeriği'),
+    )
+    name = models.CharField(choices=TYPES, unique=True, max_length=120, null=False, blank=False, verbose_name='Adı')
+
+    def __str__(self):
+        type_display = dict(self.TYPES)[self.name]
+        return type_display
+
+class Links(models.Model):
+    name = models.CharField(max_length=120, null=False, blank=False,verbose_name='Tipi')
+    url = models.URLField(max_length=255,
+        blank=False,
+        null=False,
+        verbose_name='Link')
+    company_settings = models.ForeignKey(DocumentsRepository, null=True, blank=True, on_delete=models.CASCADE)
+
+class Files(models.Model):
+    file = models.FileField(upload_to="import", blank=False, null=False, verbose_name='Dosyalar')
+    company_settings = models.ForeignKey(DocumentsRepository, null=True, blank=True, on_delete=models.CASCADE)
+
+    @property
+    def file_url(self):
+        return self.file.url
+
+
+

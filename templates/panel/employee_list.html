@@ -1,0 +1,8 @@
+<h1>Employees</h1>{{ now }}
+<ul>
+{% for employee in object_list %}
+    <li>{{ employee.ate|date }} - {{ employee.name }}</li>
+{% empty %}
+    <li>No articles yet.</li>
+{% endfor %}
+</ul>
