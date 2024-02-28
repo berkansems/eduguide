@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  app:
+    build: . #Specifies the location of the Dockerfile
+    volumes:
+      - .:/project
+    ports:
+      - 8000:8000
+    image: app:project_tag1
+    container_name: django_app
+    command: python manage.py runserver 0.0.0.0:8000
+    depends_on:
+      - db
+  db:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    container_name: postgres_db

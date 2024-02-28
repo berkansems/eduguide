@@ -1,0 +1,9 @@
+docker build --tag edugide .
+docker run --publish 8000:8000 edugide
+_______________
+sudo docker-compose build
+is used to build Docker images for services defined in the docker-compose.yml
+
+sudo docker-compose up
+is used to start the containers defined in the docker-compose.yml file
+____________________
